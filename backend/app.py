@@ -34,7 +34,21 @@ def get_db_connection():
 
 @app.route('/')
 def record_visit():
-    """Returns the number of times the page has been visited."""
+    """
+    Это главная дверь нашего домика в интернете.
+
+    Когда кто-то заходит на нашу страницу, эта функция:
+    1. Открывает картотеку
+    2. Создает таблицу для записей, если ее еще нет
+    3. Добавляет новую запись о визите
+    4. Считает все визиты
+    5. Показывает результат
+
+    Returns:
+        JSON: Сообщение об успешной записи и общее количество визитов
+    """
+
+    # Получаем ключ от картотеки
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute('CREATE TABLE IF NOT EXISTS visits ('
