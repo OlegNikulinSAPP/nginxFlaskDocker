@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3db2f3d-47d8-4faa-a1d2-439578e114f7" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/nginxFlaskDocker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/nginxFlaskDocker.iml" afterDir="false" />
+    <list default="true" id="d3db2f3d-47d8-4faa-a1d2-439578e114f7" name="Changes" comment="Docker">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,11 +81,28 @@
       <option name="project" value="LOCAL" />
       <updated>1756149215813</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Docker">
+      <option name="closed" value="true" />
+      <created>1756237320584</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1756237320584</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Docker">
+      <option name="closed" value="true" />
+      <created>1756237430712</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1756237430712</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="Docker" />
+    <option name="LAST_COMMIT_MESSAGE" value="Docker" />
   </component>
 </project>
