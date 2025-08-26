@@ -50,19 +50,32 @@ def record_visit():
 
     # Получаем ключ от картотеки
     conn = get_db_connection()
+    # Создаем помощника, который будет писать в картотеке
     cur = conn.cursor()
+    # Создаем папку для записей, если ее еще нет
+    # "CREATE TABLE IF NOT EXISTS" = "Создай папку 'visits', если ее еще нет"
+    # "visits" будет содержать номер записи (id) и время визита (timestamp)
     cur.execute('CREATE TABLE IF NOT EXISTS visits ('
                 'id serial PRIMARY KEY, '
                 'timestamp timestamptz'
                 ');')
+    # Добавляем новую запись о визите
+    # "INSERT INTO visits" = "Запиши в папку 'visits'"
+    # "VALUES (NOW())" = "текущее время"
     cur.execute('INSERT INTO visits (timestamp) VALUES (NOW());')
+    # Сохраняем изменения в картотеке (как закрываем и запираем ящик)
     conn.commit()
 
+    # Считаем все записи в папке
+    # "SELECT COUNT(*)" = "Посчитай все записи"
     cur.execute('SELECT COUNT(*) FROM visits;')
-    count = cur.fetchone()[0]
+    # Берем результат подсчета
+    count = cur.fetchone()[0]  # fetchone() берет первую строку, [0] берет первое число
+    # Убираем помощника и закрываем картотеку
     cur.close()
     conn.close()
 
+    # Показываем красивую бумажку с результатом
     return jsonify(message="Visit recorded successfully!", total_visits=count)
 
 
