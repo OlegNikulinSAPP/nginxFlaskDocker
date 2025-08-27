@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Счетчик посещений</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✨ Добро пожаловать!</h1>
+            <p>Это мое первое приложение с Flask, Nginx и Docker</p>
+        </header>
+
+        <main>
+            <div class="counter-card">
+                <h2>📊 Статистика посещений</h2>
+                <div id="visit-data">
+                    <p>Загружаем данные...</p>
+                </div>
+                <button onclick="loadVisitData()">🔄 Обновить</button>
+            </div>
+
+            <div class="info-card">
+                <h3>ℹ️ Технологии</h3>
+                <ul>
+                    <li>🐍 Flask - Python backend</li>
+                    <li>🐳 Docker - контейнеризация</li>
+                    <li>🎩 Nginx - веб-сервер</li>
+                    <li>🐘 PostgreSQL - база данных</li>
+                </ul>
+            </div>
+        </main>
+
+        <footer>
+            <p>Сделано с ❤️ используя современные технологии</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

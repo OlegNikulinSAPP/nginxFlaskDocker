@@ -81,7 +81,7 @@ def log_to_db(response, start_time):  # ✅ Убрали параметр reques
 create_logs_table()
 
 
-@app.route('/')
+@app.route('/api/visit')
 def record_visit():
     start_time = time.time()
 
@@ -121,7 +121,7 @@ def record_visit():
     return response
 
 
-@app.route('/logs')
+@app.route('/api/logs')
 def show_logs():
     conn = get_db_connection()
     cur = conn.cursor()
