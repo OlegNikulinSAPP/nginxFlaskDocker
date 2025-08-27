@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3db2f3d-47d8-4faa-a1d2-439578e114f7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/script.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nginx/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/nginx.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +129,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756289898944</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Добавлены статические файлы">
+      <option name="closed" value="true" />
+      <created>1756295931067</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1756295931067</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -143,6 +145,7 @@
     <MESSAGE value="Docker" />
     <MESSAGE value="Работа с HTTP-запросами" />
     <MESSAGE value="Добавлено логирование запросов и ответов HTTP" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлено логирование запросов и ответов HTTP" />
+    <MESSAGE value="Добавлены статические файлы" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлены статические файлы" />
   </component>
 </project>
