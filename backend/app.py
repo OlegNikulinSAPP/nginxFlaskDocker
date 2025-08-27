@@ -2,6 +2,7 @@
 import os  # Инструмент для разговора с компьютером
 from flask import Flask, jsonify  # Инструменты для создания веб-страниц
 import psycopg2  # Инструмент для разговора с базой данных (как с картотекой)
+from flask import request  # 📨 Нужно импортировать request!
 
 # Создаем наше веб-приложение - как строим маленький домик в интернете
 app = Flask(__name__)
@@ -49,6 +50,25 @@ def record_visit():
     Returns:
         JSON: Сообщение об успешной записи и общее количество визитов
     """
+    # 🎒 Достаем все из волшебного рюкзака request!
+    info = {
+        'method': request.method,
+        'path': request.path,
+        'url': request.url,
+        'args': dict(request.args),
+        'headers': dict(request.headers),
+        'cookies': dict(request.cookies),
+        'remote_addr': request.remote_addr,
+        'user_agent': str(request.user_agent),
+        'is_secure': request.is_secure,
+        'host': request.host,
+    }
+
+    # 🖨️ Печатаем в консоль
+    print("=== ВОЛШЕБНЫЙ РЮКЗАК REQUEST ===")
+    for key, value in info.items():
+        print(f"{key}: {value}")
+    print("=====================", flush=True)
 
     # Получаем ключ от картотеки
     conn = get_db_connection()
@@ -77,8 +97,20 @@ def record_visit():
     cur.close()
     conn.close()
 
-    # Показываем красивую бумажку с результатом
-    return jsonify(message="Visit recorded successfully!", total_visits=count)
+    response = jsonify(message="Visit recorded!", total_visits=count)
+
+    # 🎯 Полная информация об ответе
+    print("\n" + "=" * 60)
+    print("📨 FLASK ОТПРАВЛЯЕТ БРАУЗЕРУ:")
+    print(f"Status: HTTP/1.1 {response.status_code}")
+    print(f"Content-Type: {response.content_type}")
+    print(f"Content-Length: {response.content_length} bytes")
+    print(f"Headers: {dict(response.headers)}")
+    print("Body:")
+    print(response.get_data(as_text=True))
+    print("=" * 60 + "\n", flush=True)
+
+    return response
 
 
 if __name__ == "__main__":

@@ -7,6 +7,10 @@ services:
       - ./.env
     depends_on:
       - db
+    environment:
+      - FLASK_DEBUG=1  # ✅ Включить debug mode
+      - FLASK_ENV=development  # 🐍 Режим разработки
+    command: python -m flask run --host=0.0.0.0 --port=5000 --debug  # 🔄 Автоперезагрузка
 
   db:
     image: postgres:13-alpine
