@@ -24,7 +24,7 @@ def create_logs_table():
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute('''
-        CREATE TABLE IF NOT EXIST request_logs (
+        CREATE TABLE IF NOT EXISTS request_logs (
         id serial PRIMARY KEY,
         timestamp timestamptz DEFAULT NOW(),
         method VARCHAR(10),
@@ -88,12 +88,12 @@ def record_visit():
     cur = con.cursor()
 
     cur.execute('''
-        CREATE TABLE IF NOT EXIST visits (
+        CREATE TABLE IF NOT EXISTS visits (
             id serial PRIMARY KEY,
             timestamp timestamptz
         )
     ''')
-    cur.execute('''INSERT INTO visits (timestamp) VALUES (NAW());''')
+    cur.execute('''INSERT INTO visits (timestamp) VALUES (NOW());''')
     con.commit()
 
     cur.execute('''SELECT COUNT(*) FROM visits;''')
@@ -111,18 +111,18 @@ def record_visit():
 
 @app.route('/api/logs')
 def show_logs():
-    con = get_db_connection()
+    conn = get_db_connection()
     cur = conn.cursor()
 
     cur.execute('''SELECT * FROM request_logs ORDER BY timestamp DESC LIMIT 50;''')
-    logs = cur.fetchone()
+    logs = cur.fetchall()
 
-    colnames = [desc[0] for desc in cur.descripnion]
+    colnames = [desc[0] for desc in cur.description]
 
     cur.close()
     conn.close()
 
-    logs_list =[]
+    logs_list = []
     for log in logs:
         log_dict = {}
         for i, value in enumerate(log):

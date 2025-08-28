@@ -1,4 +1,18 @@
 services:
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=mydb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d mydb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
   backend:
     build: ./backend
     volumes:
@@ -9,35 +23,33 @@ services:
       - POSTGRES_USER=myuser
       - POSTGRES_PASSWORD=mypassword
       - POSTGRES_DB=mydb
-    command: python -m flask run --host=0.0.0.0 --port=5000 --debug
+    command: >
+      sh -c "echo '🕐 Ждем 10 секунд пока БД запустится...' &&
+      sleep 10 &&
+      echo '🚀 Запускаем Flask...' &&
+      python -m flask run --host=0.0.0.0 --port=5000 --debug"
     depends_on:
       db:
         condition: service_healthy
-
-  db:
-    image: postgres:13-alpine
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=myuser
-      - POSTGRES_PASSWORD=mypassword
-      - POSTGRES_DB=mydb
-
-  adminer:
-    image: adminer
-    ports:
-      - "8080:8080"
-    depends_on:
-      - nginx
+    restart: unless-stopped
 
   nginx:
     build: ./nginx
     ports:
       - "80:80"
     volumes:
-      - ./static:/var/www/static  # 📂 Монтируем статику
+      - ./static:/var/www/static
     depends_on:
       - backend
+    restart: unless-stopped
+
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    restart: unless-stopped
 
 volumes:
   postgres_data:
