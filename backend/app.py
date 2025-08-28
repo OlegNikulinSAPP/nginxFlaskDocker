@@ -75,3 +75,62 @@ def log_to_db(response, start_time):
     finally:
         cur.close()
         conn.close()
+
+
+create_logs_table()
+
+
+@app.route('/api/visit')
+def record_visit():
+    start_time = time.time()
+
+    con = get_db_connection()
+    cur = con.cursor()
+
+    cur.execute('''
+        CREATE TABLE IF NOT EXIST visits (
+            id serial PRIMARY KEY,
+            timestamp timestamptz
+        )
+    ''')
+    cur.execute('''INSERT INTO visits (timestamp) VALUES (NAW());''')
+    con.commit()
+
+    cur.execute('''SELECT COUNT(*) FROM visits;''')
+    count = cur.fetchone()[0]
+
+    cur.close()
+    con.close()
+
+    response = jsonify(message="Visit recorded!", total_visits=count)
+
+    log_to_db(response, start_time)
+
+    return response
+
+
+@app.route('/api/logs')
+def show_logs():
+    con = get_db_connection()
+    cur = conn.cursor()
+
+    cur.execute('''SELECT * FROM request_logs ORDER BY timestamp DESC LIMIT 50;''')
+    logs = cur.fetchone()
+
+    colnames = [desc[0] for desc in cur.descripnion]
+
+    cur.close()
+    conn.close()
+
+    logs_list =[]
+    for log in logs:
+        log_dict = {}
+        for i, value in enumerate(log):
+            log_dict[colnames[i]] = value
+        logs_list.append(log_dict)
+
+    return jsonify(logs=logs_list)
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000, debug=True)
